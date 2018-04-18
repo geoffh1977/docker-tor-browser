@@ -28,8 +28,8 @@ USER ${TOR_USER}
 RUN cd /opt/tor && \
   curl -sSL -o /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz && \
   curl -sSL -o /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc && \
-  gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290" && \
-  gpg --verify /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc && \
+  gpg --keyserver pool.sks-keyservers.net --recv-keys 0x4E2C6E8793298290 && \
+  gpg --verify /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz && \
   tar xvf /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz && \
   rm -f /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc /opt/tor/tor-browser_en-US/Browser/Downloads && \
   ln -s /Downloads /opt/tor/tor-browser_en-US/Browser/Downloads
