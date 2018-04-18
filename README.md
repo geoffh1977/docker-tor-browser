@@ -1,6 +1,6 @@
 # Tor Project Browser Container #
 
-![alt text](https://raw.githubusercontent.com/geoffh1977/tor-browser/master/images/docker-tor.png)
+![alt text](https://raw.githubusercontent.com/geoffh1977/tor-browser/master/assets/docker-tor.png)
 
 ## Description ##
 This docker image is providing an ephemeral image which can be used for anonymous web browsing on any machine running the docker daemon. It contains the Tor Browser project and an installation of Firefox-ESR.
