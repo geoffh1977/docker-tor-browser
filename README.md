@@ -9,7 +9,7 @@ This docker image is providing an ephemeral image which can be used for anonymou
 
 The docker container can be started with the following command - the X interface will be linked to the container so the software can run.
 
-`docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro geoffh/tor-browser`
+`docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro geoffh1977/tor-browser`
 
 ### Saving Downloads ###
 
