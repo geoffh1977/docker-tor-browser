@@ -3,8 +3,8 @@ FROM debian:stable-slim
 MAINTAINER geoffh1977 <geoffh1977@gmail.com>
 
 # Set Variables For Docker Image
-ARG TOR_VERSION="7.5.3"
 ARG TOR_USER="user"
+ENV TOR_VERSION=""
 
 # Install Packages For Tor Browser and Firefox ESR
 RUN export DEBIAN_FRONTEND=noninteractive && \
@@ -22,6 +22,7 @@ RUN useradd -m -d /home/${TOR_USER} ${TOR_USER} && \
 
 # GPG Keys Loaded From File - Work Around For Unreliable GPG Key Server
 COPY assets/gnupg.tar.gz /tmp/gnupg.tar.gz
+COPY assets/VERSION /opt/tor/VERSION
 RUN mkdir -p /home/${TOR_USER}/.gnupg && \
   tar zxf /tmp/gnupg.tar.gz -C /home/${TOR_USER}/.gnupg --strip 1 && \
   chmod 700 /home/${TOR_USER}/.gnupg && \
@@ -34,11 +35,12 @@ USER ${TOR_USER}
 
 # Download, Check, And Install Tor Project Files
 RUN cd /opt/tor && \
+  export TOR_VERSION=$(cat /opt/tor/VERSION) && \
   curl -sSL -o /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz && \
   curl -sSL -o /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc && \
   # gpg --keyserver pool.sks-keyservers.net --recv-keys 0x4E2C6E8793298290 && \
   gpg --verify /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz && \
-  tar xvf /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz && \
+  tar xf /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz && \
   rm -f /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc /opt/tor/tor-browser_en-US/Browser/Downloads && \
   ln -s /Downloads /opt/tor/tor-browser_en-US/Browser/Downloads
 
