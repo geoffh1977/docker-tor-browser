@@ -2,10 +2,15 @@
 
 # A Script That Is Run By The CI Server To Check And Update The Build Version
 
-# Get The Versions Of The Software
+# Get The Online Version Of the Software
+DOWNLOAD_FILE=$(curl -s https://www.torproject.org/download/download-easy.html.en | grep -o "tor-browser-linux64-.*_en-US.tar.xz" | head -1)
+SITE_VERSION=$(echo "${DOWNLOAD_FILE}" | grep -Eo "[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}")
+[ "${SITE_VERSION}" == "" ] && SITE_VERSION=$(echo "${DOWNLOAD_FILE}" | grep -Eo "[0-9]{1,2}\.[0-9]{1,2}")
+[ "${SITE_VERSION}" == "" ] && echo "Unable To Get Version From Site!" && exit 1
+
+# Get The Local Version Of The Software
 [ ! -f assets/VERSION ] && echo "0.0.0" > assets/VERSION
-SITE_VERSION=$(curl -s https://www.torproject.org/download/download-easy.html.en | grep -o "tor-browser-linux64-.*_en-US.tar.xz" | head -1 | grep -Eo "[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}")
-LOCAL_VERSION=$(grep -Eo "[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}" assets/VERSION)
+LOCAL_VERSION=$(cat assets/VERSION)
 
 # Check Versions And Perform Update Actions
 if [ "$SITE_VERSION" != "$LOCAL_VERSION" ]
