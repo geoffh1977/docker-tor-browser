@@ -1,6 +1,6 @@
 # Build Tor Browser Docker Image
 FROM debian:stable-slim
-MAINTAINER geoffh1977 <geoffh1977@gmail.com>
+LABEL maintainer="geoffh1977 <geoffh1977@gmail.com>"
 
 # Set Variables For Docker Image
 ARG TOR_USER="user"
@@ -38,7 +38,7 @@ RUN cd /opt/tor && \
   export TOR_VERSION=$(cat /opt/tor/VERSION) && \
   curl -sSL -o /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz && \
   curl -sSL -o /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc && \
-  # gpg --keyserver pool.sks-keyservers.net --recv-keys 0x4E2C6E8793298290 && \
+  gpg --keyserver pool.sks-keyservers.net --recv-keys 0x4E2C6E8793298290 && \
   gpg --verify /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz && \
   tar xf /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz && \
   rm -f /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc /opt/tor/tor-browser_en-US/Browser/Downloads && \
