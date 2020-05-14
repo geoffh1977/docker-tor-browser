@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Get Software Version
+# shellcheck disable=SC2155
+export TOR_VERSION=$(cat TOR_VERSION)
+
+# Build Image
+docker build --build-arg TOR_VERSION="${TOR_VERSION}" -f "${DOCKERFILE_PATH}" -t "${IMAGE_NAME}" .
