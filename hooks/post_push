@@ -2,8 +2,8 @@
 
 # Get Software Version
 # shellcheck disable=SC2155
-export TOR_VERSION=$(cat TOR_VERSION)
+export VERSION=$(cat VERSION)
 
 # Push Additional Version
-docker tag "${IMAGE_NAME}" "${DOCKER_REPO}:${TOR_VERSION}"
-docker push "${DOCKER_REPO}:${TOR_VERSION}"
+docker tag "${IMAGE_NAME}" "${DOCKER_REPO}:${VERSION}"
+docker push "${DOCKER_REPO}:${VERSION}"
