@@ -4,6 +4,6 @@
 if [ ! -f VERSION ]
 then
   DOWNLOAD_FILE=$(curl -s https://www.torproject.org/download/ | grep -o "tor-browser-linux64-.*_en-US.tar.xz" | head -1)
-  VERSION=$(echo "${DOWNLOAD_FILE}" | grep -Eo "[0-9]{1,2}\.[0-9]{1,2}(\.[0-9]{1,2})?)"
+  VERSION=$(echo "${DOWNLOAD_FILE}" | grep -Eo "[0-9]{1,2}\.[0-9]{1,2}(\.[0-9]{1,2})?")
   echo "${VERSION}" > VERSION
 fi
