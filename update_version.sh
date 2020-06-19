@@ -2,7 +2,7 @@
 
 # Download Current Version From Website
 DOWNLOAD_FILE=$(curl -s https://www.torproject.org/download/ | grep -o "tor-browser-linux64-.*_en-US.tar.xz" | head -1)
-VERSION=$(echo "${DOWNLOAD_FILE}" | grep -Eo "[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}")
+VERSION=$(echo "${DOWNLOAD_FILE}" | grep -Eo "[0-9]{1,2}\.[0-9]{1,2}(\.[0-9]{1,2})?)"
 
 # Download Current Docker Hub Repository Tags
 REPO_TAGS=$(curl -s https://registry.hub.docker.com/v1/repositories/geoffh1977/tor-browser/tags  | sed -e 's/[][]//g' -e 's/"//g' -e 's/ //g' | tr '}' '\n'  | awk -F: '{print $3}')
