@@ -1,0 +1,42 @@
+---
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.02
+    resource_class: small
+    steps:
+      - checkout
+
+      - run:
+          name: Check Software Version Details
+          command: ./scripts/check_version.sh
+
+      - run:
+          name: Execute Docker Hub Build (if required)
+          command: |
+            if [ "${REBUILD_REQUIRED}" == "true" ]; then
+              echo "Rebuild Required! Executing..."
+              curl -X POST https://hub.docker.com/api/build/v1/source/e955c495-24a8-4ace-935b-2aae4c4314c4/trigger/f5b1e337-b14f-4a6a-9bff-542e9c2cf078/call/
+            else
+              echo "No Rebuild Required."
+            fi
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build
+
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
+
+    jobs:
+      - build

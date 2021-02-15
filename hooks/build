@@ -5,4 +5,4 @@
 export VERSION=$(cat VERSION)
 
 # Build Image
-docker build --build-arg TOR_VERSION="${VERSION}" -f "${DOCKERFILE_PATH}" -t "${IMAGE_NAME}" .
+docker build --build-arg VERSION="${VERSION}" -f "${DOCKERFILE_PATH}" -t "${IMAGE_NAME}" .

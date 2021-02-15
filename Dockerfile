@@ -1,11 +1,10 @@
 # Tor Browser Docker Image
 FROM debian:stable-slim
-LABEL maintainer="geoffh1977 <geoffh1977@gmail.com>"
+LABEL maintainer="Geoffrey Harrison <geoffh1977@gmail.com>"
 
 # Set Variables For Docker Image
 ARG TOR_USER="user"
-ARG TOR_VERSION="9.0.10"
-ENV TOR_VERSION=$TOR_VERSION
+ARG VERSION
 
 # Install Packages For Tor Browser
 # hadolint ignore=DL3008,SC2015
@@ -27,9 +26,9 @@ WORKDIR /opt/tor
 USER ${TOR_USER}
 
 # Download, Check, And Install Tor Project Files
-RUN curl -sSL -o /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz && \
-  tar xf /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz && \
-  rm -f /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz /opt/tor/tor-browser_en-US/Browser/Downloads && \
+RUN curl -sSL -o /tmp/tor-browser.tar.xz https://www.torproject.org/dist/torbrowser/${VERSION}/tor-browser-linux64-${VERSION}_en-US.tar.xz && \
+  tar xf /tmp/tor-browser.tar.xz && \
+  rm -f /tmp/tor-browser.tar.xz /opt/tor/tor-browser_en-US/Browser/Downloads && \
   ln -s /Downloads /opt/tor/tor-browser_en-US/Browser/Downloads
 
 # Configure Volumes And Work Directory
