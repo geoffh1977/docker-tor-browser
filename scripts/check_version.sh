@@ -1,7 +1,7 @@
 #!/bin/bash -xe
 
 # Get Latests Docker Hub Tag
-LATEST_TAG=$(curl -s https://hub.docker.com/v2/repositories/geoffh1977/tor-browser/tags | jq -r '.results[].name' | grep -v "[a-z]" | sort -rn | head -n1)
+LATEST_TAG=$(curl -s https://hub.docker.com/v2/repositories/geoffh1977/tor-browser/tags | jq -r '.results[].name' | grep -v "[a-z]" | sort -n -t "." -k1,1 -k 2,2 -k3,3 -r | head -n1)
 
 # Get Live Software Version
 DOWNLOAD_FILE=$(curl -s https://www.torproject.org/download/ | grep -o "tor-browser-linux64-.*_en-US.tar.xz" | head -1)
