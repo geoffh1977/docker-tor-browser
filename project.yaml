@@ -1,0 +1,8 @@
+---
+# Main Configuration File For The Project
+# This file contains all the top level configuration parameters needed by elements of the project.
+
+project:
+  hub:
+    owner: geoffh1977
+    image: tor-browser

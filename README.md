@@ -1,7 +1,7 @@
 # Tor Project Browser Image #
 
 <p align="center">
-<img src="https://github.com/geoffh1977/docker-tor-browser/raw/master/images/tor_logo.png" width="50%" height="50%" text-align="center">
+<img src="https://github.com/geoffh1977/docker-tor-browser/raw/master/.github/images/tor_logo.png" width="50%" height="50%" text-align="center">
 </p>
 
 ![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/geoffh1977/tor-browser?style=plastic) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/geoffh1977/tor-browser?style=plastic) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/geoffh1977/tor-browser/latest?style=plastic) ![Docker Pulls](https://img.shields.io/docker/pulls/geoffh1977/tor-browser?style=plastic) ![Circle CI Status](https://img.shields.io/circleci/build/github/geoffh1977/docker-tor-browser/master?label=cirecleci&style=plastic&token=29ad39274db889dc198cfebe664f65068191be10)

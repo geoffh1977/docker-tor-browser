@@ -1,5 +1,6 @@
-.circleci/
-hooks/
 scripts/
-images/
+.editorconfig
+.gitignore
+Makefile
+project.yaml
 README.md
